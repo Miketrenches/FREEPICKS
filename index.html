@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>FREEPICKS · BET FREE. WIN BOUNTIES.</title>
+  <meta name="description" content="World Cup 2026 parlays. Free to play. Bounties paid out via pump.fun." />
+  <meta property="og:title" content="FREEPICKS · World Cup × Pump.fun Bounties" />
+  <meta property="og:description" content="Pick the parlay. Hit every leg. Split the pump.fun bounty." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#111111" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23111'/%3E%3Ctext x='50%25' y='58%25' font-family='Audiowide,sans-serif' font-size='34' fill='%23D4AF37' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-view="home">
+
+  <!-- ============ FX LAYERS ============ -->
+  <div class="fx-bg" aria-hidden="true">
+    <video class="fx-video" id="fxVideo" autoplay muted loop playsinline preload="auto" poster="">
+      <source src="assets/bg.mp4" type="video/mp4" />
+    </video>
+    <div class="fx-grid"></div>
+    <div class="fx-glow fx-glow--1"></div>
+    <div class="fx-glow fx-glow--2"></div>
+    <div class="fx-glow fx-glow--3"></div>
+    <div class="fx-shade"></div>
+    <div class="fx-scan"></div>
+  </div>
+
+  <!-- ============ CLICK SFX ============ -->
+  <audio id="clickFx" src="assets/click.mp4" preload="auto" playsinline></audio>
+
+  <!-- ============ HOME VIEW (SPLASH) ============ -->
+  <main class="view view--home" data-view-id="home">
+    <div class="splash">
+
+      <!-- TOP STRIP -->
+      <div class="splash__top">
+        <div class="splash__top-side"></div>
+        <div class="splash__brand-wrap">
+          <h1 class="splash__brand glitch" data-text="FREEPICKS">FREEPICKS</h1>
+          <span class="splash__brand-cap">WC<b>26</b> · PUMP.FUN BOUNTIES</span>
+        </div>
+        <div class="splash__top-links">
+          <a href="#" id="splashPump" target="_blank" rel="noopener">PUMP.FUN</a>
+          <span class="splash__dot">·</span>
+          <a href="#" id="splashX"    target="_blank" rel="noopener">X</a>
+          <a class="splash__how" href="#" data-go="bounty">HOW IT WORKS ↗</a>
+        </div>
+      </div>
+
+      <!-- MAIN GRID -->
+      <div class="splash__main">
+
+        <!-- LEFT: slogan + CTA -->
+        <div class="splash__hero">
+          <h2 class="splash__slogan">
+            <span class="line">FREE</span>
+            <span class="line">PICKS</span>
+            <span class="line line--gold line--mark glitch" data-text="REAL">REAL</span>
+            <span class="line line--gold glitch" data-text="REWARDS">REWARDS</span>
+          </h2>
+          <div class="splash__rule"></div>
+          <p class="splash__pitch">
+            Free parlays funded by pump.fun bounty pools.<br>
+            No entry. No rake. Hit every leg, split the pot.
+          </p>
+          <div class="splash__cta">
+            <button class="btn-big btn-big--gold" data-go="play">OPEN THE BOOK <i>→</i></button>
+            <button class="btn-big btn-big--ghost" data-go="picks">MY PICKS <i>↗</i></button>
+          </div>
+        </div>
+
+        <!-- RIGHT: featured match-bounty card -->
+        <button class="feature" id="splashFeature" type="button" aria-label="Open featured bounty">
+          <div class="feature__head">
+            <span class="feature__head-l">NEXT BOUNTY · <b id="featGroup">GROUP A</b></span>
+            <span class="feature__tier">5 PREDICTIONS</span>
+          </div>
+
+          <div class="feature__matchup">
+            <div class="feature__team">
+              <img class="feature__flag" id="featHomeFlag" alt="" loading="lazy" />
+              <span class="feature__code" id="featHomeCode">—</span>
+              <span class="feature__tname" id="featHomeName">—</span>
+            </div>
+            <div class="feature__vs">VS</div>
+            <div class="feature__team">
+              <img class="feature__flag" id="featAwayFlag" alt="" loading="lazy" />
+              <span class="feature__code" id="featAwayCode">—</span>
+              <span class="feature__tname" id="featAwayName">—</span>
+            </div>
+          </div>
+
+          <div class="feature__pool feature__pool--center">
+            <span class="feature__pool-num" id="featPool">—</span>
+          </div>
+
+          <div class="feature__count">
+            <div class="feature__count-lbl">KICKOFF IN</div>
+            <div class="feature__count-num" id="featCount">— : — : —</div>
+          </div>
+
+          <div class="feature__cta-row">
+            <span class="feature__pump">VIEW BOUNTY ON PUMP.FUN</span>
+            <span class="feature__cta">BOOK NOW →</span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+    <div class="footer-line">FREE TO PLAY · NO RAKE · BOUNTIES PAID OUT VIA PUMP.FUN · 18+</div>
+  </main>
+
+  <!-- ============ PLAY (BOOK A MATCH) ============ -->
+  <main class="view view--play" data-view-id="play">
+    <div class="subhead">
+      <button class="back" data-go="home">◀ BACK</button>
+      <div class="subhead__title glitch" data-text="BOOK MATCH">BOOK MATCH</div>
+      <div class="subhead__count"><span id="matchCount">0</span> MATCHES</div>
+    </div>
+
+    <div class="play-note">
+      <span class="play-note__tag">NOTE</span>
+      <span class="play-note__text">Bounties go live on pump.fun shortly after each match's $FREEPICKS launch — pre-book your 5 predictions here, paste the message into the bounty when it drops.</span>
+    </div>
+
+    <div class="grid grid--matches" id="matchGrid"></div>
+    <div class="footer-line">PICK THE WINNER · LOCK BEFORE KICKOFF · BOUNTIES PAID VIA PUMP.FUN</div>
+  </main>
+
+  <!-- ============ MY PICKS ============ -->
+  <main class="view view--picks" data-view-id="picks">
+    <div class="subhead">
+      <button class="back" data-go="home">◀ BACK</button>
+      <div class="subhead__title glitch" data-text="MY PICKS">MY PICKS</div>
+      <div class="subhead__count"><span id="picksCount">0</span> PLACED</div>
+    </div>
+
+    <div class="picks-list" id="picksBody"></div>
+
+    <div class="picks-empty" id="picksEmpty" hidden>
+      <div class="picks-empty__lbl">NO PICKS LOCKED YET</div>
+      <div class="picks-empty__sub">Pick a match, lock 5 predictions, and your booked bounty entries will land here.</div>
+      <button class="btn btn--pink" data-go="play">OPEN THE BOOK →</button>
+    </div>
+
+    <div class="footer-line">PICKS LIVE ON THIS DEVICE · CLEAR LOCAL DATA TO RESET</div>
+  </main>
+
+  <!-- ============ BOUNTY INFO ============ -->
+  <main class="view view--bounty" data-view-id="bounty">
+    <div class="subhead">
+      <button class="back" data-go="home">◀ BACK</button>
+      <div class="subhead__title glitch" data-text="HOW IT WORKS">HOW IT WORKS</div>
+      <div class="subhead__count">PUMP.FUN × FREEPICKS</div>
+    </div>
+
+    <div class="bounty">
+      <div class="bounty__intro" id="bountyIntro"></div>
+      <div class="bounty__steps" id="bountySteps"></div>
+      <div class="bounty__cta">
+        <a class="btn btn--pink" id="ctaPump"  href="#" target="_blank" rel="noopener">VIEW $FREEPICKS ON PUMP.FUN</a>
+        <button class="btn btn--ghost" data-go="play">START PICKING</button>
+      </div>
+    </div>
+    <div class="footer-line">NO ENTRY FEE · NO WALLET REQUIRED · BOUNTIES FUNDED BY $FREEPICKS TREASURY</div>
+  </main>
+
+  <!-- ============ PARLAY DETAIL MODAL ============ -->
+  <div class="modal" id="parlayModal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+      <button class="modal__x" data-close aria-label="close">×</button>
+      <div class="pm">
+        <div class="pm__head">
+          <div class="pm__diff" id="pmDiff">—</div>
+          <h2 class="pm__title" id="pmTitle">—</h2>
+          <div class="pm__sub"  id="pmSub">—</div>
+        </div>
+
+        <div class="pm__pool">
+          <div class="pm__pool-num" id="pmPool">—</div>
+          <div class="pm__pool-lbl">BOUNTY POOL</div>
+        </div>
+
+        <div class="pm__legs" id="pmLegs"></div>
+
+        <div class="pm__meta">
+          <div class="pm__meta-row"><span>KICKOFF</span><b id="pmKick">—</b></div>
+          <div class="pm__meta-row"><span>ENTRANTS</span><b id="pmEntries">—</b></div>
+          <div class="pm__meta-row"><span>STATUS</span><b id="pmStatus">—</b></div>
+        </div>
+
+        <form class="pm__form" id="pmForm" autocomplete="off">
+          <label class="pm__lbl" for="pmHandle">YOUR X HANDLE OR PUMP.FUN WALLET</label>
+          <input class="pm__input" id="pmHandle" maxlength="60" placeholder="@yourhandle" required />
+          <button class="btn btn--pink pm__submit" type="submit">LOCK IN PICK</button>
+          <a class="pm__pump" id="pmPump" href="#" target="_blank" rel="noopener">VIEW BOUNTY ON PUMP.FUN ↗</a>
+        </form>
+
+        <div class="pm__success" id="pmSuccess" hidden>
+          <div class="pm__success-tag glitch" data-text="LOCKED IN">LOCKED IN</div>
+          <div class="pm__success-msg" id="pmSuccessMsg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MATCH PICK MODAL ============ -->
+  <div class="modal" id="matchModal" hidden>
+    <div class="modal__backdrop" data-mclose></div>
+    <div class="modal__panel modal__panel--match" role="dialog" aria-modal="true" aria-labelledby="mmTitle">
+      <button class="modal__x" data-mclose aria-label="close">×</button>
+      <div class="mm">
+
+        <!-- Match header -->
+        <div class="mm__head">
+          <span class="mm__group" id="mmGroup">—</span>
+          <span class="mm__kick"  id="mmKick">—</span>
+        </div>
+
+        <div class="mm__teams" id="mmTitle">
+          <div class="mm__team">
+            <img class="mm__flag" id="mmHomeFlag" alt="" loading="lazy" />
+            <div class="mm__code" id="mmHome">—</div>
+            <div class="mm__name" id="mmHomeName">—</div>
+          </div>
+          <div class="mm__vs">VS</div>
+          <div class="mm__team">
+            <img class="mm__flag" id="mmAwayFlag" alt="" loading="lazy" />
+            <div class="mm__code" id="mmAway">—</div>
+            <div class="mm__name" id="mmAwayName">—</div>
+          </div>
+        </div>
+
+        <div class="mm__venue" id="mmVenue">—</div>
+
+        <div class="mm__pool">
+          <span class="mm__pool-num" id="mmPool">—</span>
+          <span class="mm__pool-lbl">BOUNTY POOL · WINNERS SPLIT</span>
+        </div>
+
+        <!-- 5 PREDICTION BLOCKS -->
+        <div class="mm__preds-head">
+          <span>5 PREDICTIONS</span>
+          <span class="mm__preds-progress"><b id="mmProgress">0</b> / 5 LOCKED</span>
+        </div>
+        <div class="mm__preds">
+
+          <div class="pred" data-q="winner">
+            <div class="pred__lbl"><span class="pred__num">01</span> WINNER?</div>
+            <div class="pred__opts" id="qWinner"></div>
+          </div>
+
+          <div class="pred" data-q="goals">
+            <div class="pred__lbl"><span class="pred__num">02</span> TOTAL GOALS?</div>
+            <div class="pred__opts" id="qGoals">
+              <button class="pred__opt" type="button" data-v="0">0</button>
+              <button class="pred__opt" type="button" data-v="1">1</button>
+              <button class="pred__opt" type="button" data-v="2">2</button>
+              <button class="pred__opt" type="button" data-v="3">3</button>
+              <button class="pred__opt" type="button" data-v="4">4</button>
+              <button class="pred__opt" type="button" data-v="5+">5+</button>
+            </div>
+          </div>
+
+          <div class="pred" data-q="firstGoal">
+            <div class="pred__lbl"><span class="pred__num">03</span> FIRST GOAL?</div>
+            <div class="pred__opts" id="qFirstGoal"></div>
+          </div>
+
+          <div class="pred" data-q="btts">
+            <div class="pred__lbl"><span class="pred__num">04</span> BOTH TEAMS SCORE?</div>
+            <div class="pred__opts" id="qBtts">
+              <button class="pred__opt" type="button" data-v="yes">YES</button>
+              <button class="pred__opt" type="button" data-v="no">NO</button>
+            </div>
+          </div>
+
+          <div class="pred" data-q="scorer">
+            <div class="pred__lbl"><span class="pred__num">05</span> ANYTIME GOALSCORER?</div>
+            <div class="pred__opts pred__opts--scorers" id="qScorer"></div>
+          </div>
+
+        </div>
+
+        <form class="mm__form" id="mmForm" autocomplete="off">
+          <label class="pm__lbl" for="mmHandle">YOUR X HANDLE OR PUMP.FUN WALLET</label>
+          <input class="pm__input" id="mmHandle" maxlength="60" placeholder="@yourhandle" required />
+          <button class="btn btn--pink mm__submit" type="submit" disabled>LOCK ALL 5 TO BOOK</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ REVIEW / COPY POPUP ============ -->
+  <div class="modal" id="mmReview" hidden>
+    <div class="modal__backdrop" data-revclose></div>
+    <div class="modal__panel modal__panel--review" role="dialog" aria-modal="true" aria-labelledby="mmReviewTitle">
+      <button class="modal__x" data-revclose aria-label="close">×</button>
+      <div class="mm__review-body">
+        <div class="mm__review-head">
+          <span class="mm__review-step">STEP 2 / 2</span>
+          <span class="mm__review-title" id="mmReviewTitle">PASTE THIS INTO THE PUMP.FUN BOUNTY</span>
+        </div>
+        <textarea class="mm__review-text" id="mmReviewText" readonly spellcheck="false" rows="11"></textarea>
+        <button class="btn btn--ghost mm__copy" id="mmCopyBtn" type="button">COPY MESSAGE</button>
+        <button class="btn btn--pink mm__lockin" id="mmLockInBtn" type="button">LOCK IN ON PUMP.FUN →</button>
+        <button class="mm__back" id="mmBackBtn" type="button">← EDIT PICKS</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MOD VIEW (Shift+M or #mod) ============ -->
+  <div class="modal modal--mod" id="modView" hidden>
+    <div class="modal__backdrop" data-close-mod></div>
+    <div class="modal__panel modal__panel--mod">
+      <button class="modal__x" data-close-mod aria-label="close">×</button>
+      <div class="mod">
+        <div class="mod__head">
+          <div class="mod__title glitch" data-text="MOD CONSOLE">MOD CONSOLE</div>
+          <div class="mod__sub">LOCAL · SHIFT+M TO TOGGLE</div>
+        </div>
+        <div class="mod__tabs">
+          <button class="mod__tab is-active" data-tab="bounties">BOUNTIES</button>
+          <button class="mod__tab" data-tab="entries">ENTRIES</button>
+          <button class="mod__tab" data-tab="reset">DANGER</button>
+        </div>
+        <div class="mod__body" id="modBody"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TEMPLATES ============ -->
+  <template id="tmplMatch">
+    <button class="match" data-id="">
+      <div class="match__head">
+        <span class="match__group"></span>
+        <span class="match__kick"></span>
+      </div>
+      <div class="match__teams">
+        <div class="match__team">
+          <img class="match__flag" alt="" loading="lazy" />
+          <span class="match__code"></span>
+          <span class="match__name"></span>
+        </div>
+        <div class="match__vs">VS</div>
+        <div class="match__team match__team--away">
+          <img class="match__flag" alt="" loading="lazy" />
+          <span class="match__code"></span>
+          <span class="match__name"></span>
+        </div>
+      </div>
+      <div class="match__meta">
+        <span class="match__venue"></span>
+        <span class="match__city"></span>
+      </div>
+      <div class="match__foot">
+        <span class="match__bounty"></span>
+        <span class="match__cta">BOOK →</span>
+      </div>
+    </button>
+  </template>
+
+  <template id="tmplParlay">
+    <button class="card" data-id="">
+      <div class="card__art">
+        <div class="card__diff"></div>
+        <div class="card__pool">
+          <span class="card__pool-num"></span>
+          <span class="card__pool-tok"></span>
+        </div>
+        <div class="card__legs"></div>
+      </div>
+      <div class="card__title"></div>
+      <div class="card__sub"></div>
+      <div class="card__foot">
+        <span class="card__kick"></span>
+        <span class="card__status"></span>
+      </div>
+    </button>
+  </template>
+
+  <template id="tmplBoardRow">
+    <div class="row">
+      <div class="row__rank"></div>
+      <div class="row__handle"></div>
+      <div class="row__hits"></div>
+      <div class="row__bounty"></div>
+      <div class="row__badge"></div>
+    </div>
+  </template>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
