@@ -16,7 +16,7 @@ window.FREEPICKS_DATA = {
 
   /* ---------- LINKS ---------- */
   links: {
-    x: "https://x.com/",
+    x: "https://x.com/FREEPICKSGO",
     pumpfun: "https://pump.fun/",
     coin: "https://pump.fun/", // FREEPICKS token page
     bountyDocs: "https://pump.fun/",
